@@ -1,32 +1,55 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <a-layout>
+      <a-layout-header class="app-header">
+        <the-header />
+      </a-layout-header>
+      <a-layout-content class="app-content">
+        <transition name="t-fade" appear mode="out-in">
+          <router-view />
+        </transition>
+      </a-layout-content>
+    </a-layout>
   </div>
 </template>
 
+<script>
+import "ant-design-vue/dist/antd.css";
+import TheHeader from "@/components/TheHeader";
+
+export default {
+  name: "App",
+  components: {
+    TheHeader
+  }
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "~@/assets/styles/app.scss";
+
+$header-height: 64px;
+$offset-xl: 64px;
+$offset-md: 15px;
+
+.app-header {
+  position: fixed;
+  height: $header-height;
+  z-index: 1;
+  width: 100%;
+  @media (max-width: $screen-md) {
+    padding: 0 $offset-md;
+  }
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.app-content {
+  padding: $header-height + $offset-xl $offset-xl $offset-xl;
+  min-height: 100vh;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  @media (max-width: $screen-md) {
+    min-height: -webkit-fill-available;
+    padding: $header-height + $offset-md $offset-md $offset-md;
   }
 }
 </style>
