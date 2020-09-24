@@ -135,7 +135,7 @@ export default {
         onOk: () =>
           new Promise((resolve, reject) => {
             try {
-              this.completeAppointmentById(id).then(() => {
+              this.unCompleteAppointmentById(id).then(() => {
                 this.$notification.success({
                   message: "Appointment status has been changed successfully"
                 });

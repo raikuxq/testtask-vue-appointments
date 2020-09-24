@@ -1,4 +1,6 @@
-# appointments-app
+# Appointments App
+
+Live: [appointments.antaresx.host](https://appointments.antaresx.host/)
 
 ## Project setup
 ```
