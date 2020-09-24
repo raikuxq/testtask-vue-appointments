@@ -1,0 +1,18 @@
+@import "~@/assets/styles/variables/variables.scss";
+
+.t-fade {
+  &-leave-active,
+  &-enter-active {
+    transition: $transition-xs ease;
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter-to,
+  &-leave {
+    opacity: 1;
+  }
+}
