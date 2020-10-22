@@ -1,5 +1,5 @@
 <template>
-  <a-form layout="vertical" @submit.prevent="previewAndConfirm">
+  <a-form layout="vertical" @submit.prevent="confirm">
     <!--  Datetime  -->
     <a-form-item label="Date and time">
       <div class="form-appointment-data__datetime">
@@ -39,7 +39,7 @@
         icon="check"
         :disabled="!isFormValid"
       >
-        Preview and Confirm
+        Confirm
       </a-button>
     </a-form-item>
   </a-form>
@@ -48,7 +48,6 @@
 <script>
 import moment from "moment";
 import { mapActions } from "vuex";
-import { timeTextFormat } from "@/filters/timeTextFormat";
 
 export default {
   name: "form-appointment-data",
@@ -78,10 +77,13 @@ export default {
     };
   },
   created() {
-    const dateNow = moment().unix();
+    const defaultDate = moment()
+      .add(1, "days")
+      .startOf("day")
+      .unix();
     this.date = this.time = this.currentDateTimestamp
       ? moment(this.currentDateTimestamp)
-      : moment.unix(dateNow);
+      : moment.unix(defaultDate);
     this.description = this.currentDescription || "";
     this.title = this.currentTitle || "";
   },
@@ -105,36 +107,18 @@ export default {
       const minutes = time.minutes();
 
       return new Date(year, month, day, hours, minutes);
-    },
-
-    getPreviewTemplate() {
-      return (
-        <div>
-          <p>Date: {timeTextFormat(this.fullDate)}</p>
-          <p>Title: {this.title}</p>
-          <p>Description: {this.description || "empty"}</p>
-        </div>
-      );
     }
   },
   methods: {
     ...mapActions("appointments", ["addAppointment"]),
 
-    previewAndConfirm() {
-      this.$confirm({
-        icon: "check",
-        title: "Do you want to create this appointment? Preview:",
-        okText: "Create",
-        content: () => this.getPreviewTemplate,
-        onOk: () => {
-          const { title, description, fullDate } = this;
+    confirm() {
+      const { title, description, fullDate } = this;
 
-          this.$emit("confirm", {
-            title,
-            description,
-            fullDate
-          });
-        }
+      this.$emit("confirm", {
+        title,
+        description,
+        fullDate
       });
     }
   }
