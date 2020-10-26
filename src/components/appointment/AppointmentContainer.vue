@@ -102,26 +102,17 @@ export default {
      * @param id - appointment ID
      */
     confirmComplete(id) {
-      this.$confirm({
-        icon: "check",
-        title: "Do you want to complete this appointment?",
-        onOk: () =>
-          new Promise((resolve, reject) => {
-            try {
-              this.completeAppointmentById(id).then(() => {
-                this.$notification.success({
-                  message: "Appointment status has been changed successfully"
-                });
-                resolve();
-              });
-            } catch (e) {
-              this.$notification.warning({
-                message: "Cannot change status for this appointment"
-              });
-              reject(e);
-            }
-          })
-      });
+      try {
+        this.completeAppointmentById(id).then(() => {
+          this.$notification.success({
+            message: "Appointment status has been changed successfully"
+          });
+        });
+      } catch (e) {
+        this.$notification.warning({
+          message: "Cannot change status for this appointment"
+        });
+      }
     },
 
     /**
