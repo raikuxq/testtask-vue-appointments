@@ -1,9 +1,10 @@
-<template>
+ <template>
   <div class="appointment-filter">
     <a-select
       :default-value="activeType"
       placeholder="Select type"
       @change="updateFilter"
+      class="appointment-filter-select"
     >
       <a-select-option
         v-for="opt in getFilterOptions"
@@ -33,3 +34,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.appointment-filter-select {
+  min-width: 160px;
+}
+</style>

@@ -1,9 +1,6 @@
 <template>
   <div id="app">
     <a-layout>
-      <a-layout-header class="app-header">
-        <the-header />
-      </a-layout-header>
       <a-layout-content class="app-content">
         <transition name="t-fade" appear mode="out-in">
           <router-view />
@@ -15,13 +12,9 @@
 
 <script>
 import "ant-design-vue/dist/antd.css";
-import TheHeader from "@/components/TheHeader";
 
 export default {
-  name: "App",
-  components: {
-    TheHeader
-  }
+  name: "App"
 };
 </script>
 
@@ -42,14 +35,14 @@ $offset-md: 15px;
   }
 }
 .app-content {
-  padding: $header-height + $offset-xl $offset-xl $offset-xl;
+  padding: $offset-xl $offset-xl $offset-xl;
   min-height: 100vh;
   max-width: 960px;
   width: 100%;
   margin: 0 auto;
   @media (max-width: $screen-md) {
     min-height: -webkit-fill-available;
-    padding: $header-height + $offset-md $offset-md $offset-md;
+    padding: $offset-md $offset-md $offset-md;
   }
 }
 </style>

@@ -166,5 +166,10 @@ $gap: 16px;
       height: 100%;
     }
   }
+  .ant-spin-nested-loading {
+    @media (min-width: $screen-md-min) {
+      min-height: 715px;
+    }
+  }
 }
 </style>
